@@ -1,5 +1,5 @@
 persona,children,days-off-per-appearance,sick-days-per-appearance,payment-source,job-flexibility,job-instability,employed,health-costs,stage,health-impact,conflict,move
-Aisha,1,1,1,5,y,y,1,y,children,1,low,y
+Aisha,1,1,1,5,y,y,1,y,application,1,low,y
 Marcus,3,3,1,4,n,y,1,y,children,2,high,n
 Roberta,2,2,2,2,y,n,1,y,divorce-with-children,1,high,y
 Pablo,0,1,2,2,n,n,1,y,Divorce,3,low,y

@@ -1,4 +1,4 @@
-<div class="twelve columns persona-card" id='{{persona}}-card'>
+<div class="twelve columns persona-card" id='{{persona}}-card' style="background-color: {{bgColour}}">
   <div class="row">
     <div class="twelve columns">
         <h2 class='persona-name'>{{persona}}</h2>
@@ -6,23 +6,48 @@
   </div>
 
   <div class="row">
-    <div class="three columns">
+    <!-- <div class="three columns">
         <img src="" alt="{{persona}}">
+    </div> -->
+    <div class="four columns category">
+        <h3 class='category-title'>Out of pocket: <span class='oop-total'></span></h3>
+        <div class="row">
+          <div class="six columns">
+            <span class='sub-category-title'>Child Care</span>
+          </div>
+          <div class="six columns">
+            <span class='sub-category-value oop-childCare'></span>
+          </div>
+          <div class="six columns">
+            <span class='sub-category-title'>Fees</span>
+          </div>
+          <div class="six columns">
+            <span class='sub-category-value oop-fees'>$0.00</span>
+          </div>
+          <div class="six columns">
+            <span class='sub-category-title'>Lost Income</span>
+          </div>
+          <div class="six columns">
+            <span class='sub-category-value oop-lostIncome'></span>
+          </div>
+          <div class="six columns">
+            <span class='sub-category-title'>Transport</span>
+          </div>
+          <div class="six columns">
+            <span class='sub-category-value oop-transport'></span>
+          </div>
+          <div class="six columns">
+            <span class='sub-category-title'>Moving</span>
+          </div>
+          <div class="six columns">
+            <span class='sub-category-value oop-moving'></span>
+          </div>
+        </div>
     </div>
-    <div class="three columns">
-        <h3>Out of pocket: <span class='oop-total'></span></h3>
-        <ul id='oop'>
-          <li class='category-total oop-childCare'></li>
-          <li class='category-total oop-fees'></li>
-          <li class='category-total oop-lostIncome'></li>
-          <li class='category-total oop-transport'></li>
-          <li class='category-total oop-moving'></li>
-        </ul>
-    </div>
-    <div class="three columns">
+    <div class="four columns">
         <h3>Impact</h3>
     </div>
-    <div class="three columns">
+    <div class="four columns">
         <h3>Instability</h3>
     </div>
   </div>

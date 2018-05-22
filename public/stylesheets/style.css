@@ -4,5 +4,9 @@ body {
 .persona-card {
   background: lightblue;
   padding-left: 20px; }
+  .persona-card .category .six.columns {
+    margin-left: 0px; }
+  .persona-card .category .sub-category-title {
+    font-weight: bold; }
 
 /*# sourceMappingURL=style.css.map */

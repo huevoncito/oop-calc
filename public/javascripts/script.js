@@ -1,11 +1,15 @@
 const defaults = {
-  distance: 10,
+  distance: "within-15km",
   incomeBand: 3,
-  prov: "ON"
+  prov: "AB"
 };
 
+let selectedProv       = defaults.prov;
+let selectedDistance   = defaults.distance;
+let selectedIncomeBand = defaults.incomeBand
+
 const currencyFormat = '$0,0.00';
-let distance         = defaults.distance;
+
 
 //instability
 //
@@ -15,8 +19,15 @@ let distance         = defaults.distance;
 
 function runCalculations(persona) {
   //run all the calculations
-  const oop = calculateOutOfPocket(persona, "ON");
+  const oop = calculateOutOfPocket(persona, selectedProv);
   renderCategory( {persona, category: "oop", data: oop} );
+}
+
+function init() {
+  datastore.personaData.forEach( function (persona) {
+    console.log("Running" + persona.persona);
+    runCalculations(persona);
+  });
 }
 
 
@@ -26,10 +37,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
     if ( !dataFetched ) return;
 
     clearInterval(timer);
-    datastore.personaData.forEach( function (persona) {
-      console.log("Running" + persona.persona);
-      runCalculations(persona);
-    });
-
+    init();
   }, 100);
+
+  document.querySelector("#select-province").addEventListener('change', function (event) {
+    selectedProv = event.target.value;
+    init();
+  });
+
+  document.querySelector("#select-distance").addEventListener('change', function (event) {
+    selectedDistance = event.target.value;
+    init();
+  });
+
+  document.querySelector("#select-income").addEventListener('change', function (event) {
+    selectedIncomeBand = event.target.value;
+    init();
+  });
+
 });

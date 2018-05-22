@@ -59,9 +59,7 @@ function findProfessionalFeesAtStage(prov = "ON", stage) {
 
 
 function renderCategory({persona, category, data}) {
-  console.log(persona.persona, category);
   for ( var prop in data ) {
-    console.log(persona.persona, category, prop);
     document.querySelector(`#${persona.persona}-card .${category}-${prop}`).innerHTML = data[prop];
   }
 

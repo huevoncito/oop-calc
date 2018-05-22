@@ -98,25 +98,8 @@ function calculateLegalFees(persona, prov = "ON") {
 //Transportation (Court events by stage * Distance from courthouse)
 function calculateTransportCost(persona, prov) {
   const eventsAtStage = findEventsAtStage(prov, persona.stage);
-  return eventsAtStage * getTransportCost(prov);
-}
-
-
-function getTransportCost(prov) {
-  let searchString = `transport`;
-  if ( distance <= 5 ) {
-    searchString += '-within-5km';
-  } else if ( distance <= 15 ) {
-    searchString += '-within-15km';
-  } else if ( distance <= 50 ) {
-    searchString += '-within-50km';
-  } else if ( distance <= 200 ) {
-    searchString += '-within-200km';
-  } else if ( distance > 200 ) {
-    searchString += '>200km';
-  }
-
-  return getProvData(prov, searchString);
+  const transportCost = getProvData(prov, `transport-${selectedDistance}`);
+  return eventsAtStage * transportCost;
 }
 
 /*
@@ -131,7 +114,7 @@ function calculateLostIncome( persona, prov ) {
   if ( !persona.employed ) return 0;
 
   const eventsAtStage = findEventsAtStage(prov, persona.stage);
-  const income        = getProvData(prov, `daily-income-band-` + persona['payment-source']);
+  const income        = getProvData(prov, `daily-income-band-` + selectedIncomeBand);
   const paidWageLost  = eventsAtStage * persona['days-off-per-appearance'] * income;
   const sickDaysLost  = eventsAtStage * persona['sick-days-per-appearance'] * income;
 

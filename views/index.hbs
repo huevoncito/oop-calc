@@ -6,8 +6,29 @@
   </div>
 
   <div class="row" id='controls'>
-    <div class="control ">
-
+    <div class="four columns">
+      <label for="select-province">Province</label>
+      <select class="u-full-width" id="select-province" name='select-province'>
+        {{#each provinces}}
+          <option value="{{acronym}}">{{name}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="four columns">
+      <label for="select-distance">Distance</label>
+      <select class="u-full-width" id="select-distance" name='select-distance'>
+        {{#each distances}}
+          <option value="{{val}}">{{desc}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="four columns">
+      <label for="select-income">Income</label>
+      <select class="u-full-width" id="select-income" name='select-income'>
+        {{#each incomeBands}}
+          <option value="{{val}}">{{desc}}</option>
+        {{/each}}
+      </select>
     </div>
   </div>
 
