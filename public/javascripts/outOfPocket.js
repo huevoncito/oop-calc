@@ -13,16 +13,6 @@ function calculateOutOfPocket(persona, prov = "ON") {
   const lostIncome = calculateLostIncome(persona, prov);
   const moving     = calculateMovingCost(persona, prov);
 
-  // console.log(fees);
-  // console.log({
-  //   total: childCare + fees + transport + lostIncome + moving,
-  //   childCare,
-  //   // fees,
-  //   transport,
-  //   lostIncome,
-  //   moving
-  // });
-
   return {
     total      : numeral(childCare /*+ fees*/ + transport + lostIncome + moving).format(currencyFormat),
     childCare  : numeral(childCare).format(currencyFormat),
@@ -79,7 +69,6 @@ function calculateFees(persona, prov = "ON") {
 
 
 /**
-
 * Calculate legal fees for a persona in a province
 *
 * @method calculateLegalFees
@@ -115,7 +104,7 @@ function calculateLostIncome( persona, prov ) {
   if ( !persona.employed ) return 0;
 
   const eventsAtStage = findEventsAtStage(prov, persona.stage);
-  const income        = getProvData(prov, `daily-income-band-` + selectedIncomeBand);
+  const income        = getProvData(prov, `daily-income-band-` + selectedIncomeBand) * persona.employed;
   const paidWageLost  = eventsAtStage * persona['days-off-per-appearance'] * income;
   const sickDaysLost  = eventsAtStage * persona['sick-days-per-appearance'] * income;
 

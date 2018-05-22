@@ -20,7 +20,10 @@ const currencyFormat = '$0,0.00';
 function runCalculations(persona) {
   //run all the calculations
   const oop = calculateOutOfPocket(persona, selectedProv);
+  const impact = calculateImpact(persona, selectedProv);
+
   renderCategory( {persona, category: "oop", data: oop} );
+  renderCategory( {persona, category: "impact", data: impact });
 }
 
 function init() {
@@ -51,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   });
 
   document.querySelector("#select-income").addEventListener('change', function (event) {
-    selectedIncomeBand = event.target.value;
+    selectedIncomeBand = parseInt(event.target.value);
     init();
   });
 

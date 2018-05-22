@@ -15,7 +15,6 @@ router.get('/', async function(req, res, next) {
   });
 
 
-
   res.render('index', {
     name : "Not Express",
     personas: personas,
@@ -30,7 +29,8 @@ router.get('/', async function(req, res, next) {
       },
       {
         val: 3,
-        desc: 3
+        desc: 3,
+        selected: 'selected'
       },
       {
         val: 4,

@@ -26,7 +26,7 @@
       <label for="select-income">Income</label>
       <select class="u-full-width" id="select-income" name='select-income'>
         {{#each incomeBands}}
-          <option value="{{val}}">{{desc}}</option>
+          <option value="{{val}}" {{selected}}>{{desc}}</option>
         {{/each}}
       </select>
     </div>
