@@ -12,7 +12,11 @@ function getProvData(prov = "ON", prop = null) {
   if ( !!prop && _.isUndefined(provData[prop]) ) {
     throw new Error(`${prop} not defined for ${prov}`);
   }
-  return !!prop && provData[prop] || provData;
+  if (!!prop && typeof provData[prop] !== 'undefined' ) {
+    return provData[prop];
+  }
+
+  return provData;
 }
 
 
@@ -40,6 +44,7 @@ function findEventsAtStage(prov = "ON", stage) {
 */
 function findCourtFeesAtStage(prov = "ON", stage) {
   const searchString = `court-fees-by-stage-${stage.toLowerCase()}`;
+  console.log(searchString);
   return getProvData(prov, searchString);
 };
 

@@ -3,7 +3,8 @@ body {
 
 .persona-card {
   background: lightblue;
-  padding-left: 20px; }
+  padding: 30px;
+  margin-bottom: 20px; }
   .persona-card .category .six.columns {
     margin-left: 0px; }
   .persona-card .category .sub-category-title {

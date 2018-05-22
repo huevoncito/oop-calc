@@ -8,11 +8,12 @@
 */
 function calculateOutOfPocket(persona, prov = "ON") {
   const childCare  = calculateChildCareCost(persona, prov);
-  // const fees       = calculateFees(persona, prov);
+  const fees       = calculateFees(persona, prov);
   const transport  = calculateTransportCost(persona, prov);
   const lostIncome = calculateLostIncome(persona, prov);
   const moving     = calculateMovingCost(persona, prov);
 
+  // console.log(fees);
   // console.log({
   //   total: childCare + fees + transport + lostIncome + moving,
   //   childCare,
@@ -25,7 +26,7 @@ function calculateOutOfPocket(persona, prov = "ON") {
   return {
     total      : numeral(childCare /*+ fees*/ + transport + lostIncome + moving).format(currencyFormat),
     childCare  : numeral(childCare).format(currencyFormat),
-    // fees,
+    fees       : numeral(fees).format(currencyFormat),
     transport  : numeral(transport).format(currencyFormat),
     lostIncome : numeral(lostIncome).format(currencyFormat),
     moving     : numeral(moving).format(currencyFormat)
