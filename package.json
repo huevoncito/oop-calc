@@ -1,0 +1,24 @@
+{
+  "name": "family-court-calculator",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "./bin/www",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "csv-parser": "^1.12.1",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "hbs": "~4.0.1",
+    "http-errors": "~1.6.2",
+    "morgan": "~1.9.0",
+    "node-sass-middleware": "0.11.0",
+    "underscore": "^1.9.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "nodemon": "^1.17.4"
+  }
+}
