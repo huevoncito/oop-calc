@@ -14,7 +14,7 @@ function calculateOutOfPocket(persona, prov = "ON") {
   const moving     = calculateMovingCost(persona, prov);
 
   return {
-    total      : numeral(childCare /*+ fees*/ + transport + lostIncome + moving).format(currencyFormat),
+    total      : numeral(childCare + fees + transport + lostIncome + moving).format(currencyFormat),
     childCare  : numeral(childCare).format(currencyFormat),
     fees       : numeral(fees).format(currencyFormat),
     transport  : numeral(transport).format(currencyFormat),
