@@ -8,24 +8,24 @@ function calculateImpact(persona, prov = "ON") {
 
 
   return {
-    courtEvents: findEventsAtStage(prov, persona.stage),
-    prepDays: numeral( calculatePrepDays(persona, prov) ).format('0.0'),
-    instability: 0
+    courtEvents : util.findEventsAtStage(prov, persona.stage),
+    prepDays    : numeral( calculatePrepDays(persona, prov) ).format('0.[00]'),
+    instability : 0
   }
 
 }
 
 
 function calculatePrepDays(persona, prov = "ON") {
-    const courtEvents      = findEventsAtStage(prov, persona.stage);
-    console.log('income band', selectedIncomeBand);
+    const courtEvents    = util.findEventsAtStage(prov, persona.stage);
     let daysPerAppearnce = persona['days-off-per-appearance'];
+
     if ( !!persona.lawyer ) {
-      console.log( selectedIncomeBand);
-      if ( selectedIncomeBand === 6 ) {
+      console.log( userInputs.incomeBand);
+      if ( userInputs.incomeBand === 6 ) {
         console.log('in 6 adjust');
         daysPerAppearnce = daysPerAppearnce / 3;
-      } else if ( selectedIncomeBand === 5 ) {
+      } else if ( userInputs.incomeBand === 5 ) {
         console.log('in 5 adjust');
         daysPerAppearnce = 2 * (daysPerAppearnce / 3);
       }

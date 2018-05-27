@@ -1,6 +1,13 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
+#controls {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  padding-top: 10px;
+  background: white; }
+
 .persona-card {
   background: lightblue;
   padding: 30px;

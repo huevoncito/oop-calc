@@ -1,61 +1,53 @@
-const defaults = {
-  distance: "within-15km",
-  incomeBand: 3,
-  prov: "AB"
-};
+'use strict';
 
-let selectedProv       = defaults.prov;
-let selectedDistance   = defaults.distance;
-let selectedIncomeBand = defaults.incomeBand
-
+/*
+  Cache default format for numeral.js currency strings
+*/
 const currencyFormat = '$0,0.00';
 
+//Set defaults for user inputs
+let userInputs  = {
+  distance   : "within-15km",
+  incomeBand : 3,
+  prov       : "AB"
+};
 
-//instability
-//
 
+//run all the calculations and render them to the DOM
+function runCalculations() {
+  datastore.personaData.forEach( persona => {
+    //run the numbers
+    const oop    = calculateOutOfPocket(persona, userInputs.prov);
+    const impact = calculateImpact(persona, userInputs.prov);
 
-
-
-function runCalculations(persona) {
-  //run all the calculations
-  const oop = calculateOutOfPocket(persona, selectedProv);
-  const impact = calculateImpact(persona, selectedProv);
-
-  renderCategory( {persona, category: "oop", data: oop} );
-  renderCategory( {persona, category: "impact", data: impact });
-}
-
-function init() {
-  datastore.personaData.forEach( function (persona) {
-    console.log("Running" + persona.persona);
-    runCalculations(persona);
+    //render 'em
+    util.renderCategory( {persona, category: "oop", data: oop} );
+    util.renderCategory( {persona, category: "impact", data: impact });
   });
 }
 
-
+// Document.ready
 document.addEventListener("DOMContentLoaded", function(event) {
-  getData();
-  let timer = setInterval( function () {
-    if ( !dataFetched ) return;
+  getData()
+    .then( function (data) {
+      runCalculations();
+    });
 
-    clearInterval(timer);
-    init();
-  }, 100);
-
+  // Listen for Province Change
   document.querySelector("#select-province").addEventListener('change', function (event) {
-    selectedProv = event.target.value;
-    init();
+    userInputs.prov = event.target.value;
+    runCalculations();
   });
 
+  // Listen for Distance Change
   document.querySelector("#select-distance").addEventListener('change', function (event) {
-    selectedDistance = event.target.value;
-    init();
+    userInputs.distance = event.target.value;
+    runCalculations();
   });
 
+  // Listen for Income Change
   document.querySelector("#select-income").addEventListener('change', function (event) {
-    selectedIncomeBand = parseInt(event.target.value);
-    init();
+    userInputs.incomeBand = parseInt(event.target.value);
+    runCalculations();
   });
-
 });

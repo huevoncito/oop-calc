@@ -16,7 +16,6 @@ router.get('/', async function(req, res, next) {
 
 
   res.render('index', {
-    name : "Not Express",
     personas: personas,
     incomeBands: [
       {
@@ -30,7 +29,7 @@ router.get('/', async function(req, res, next) {
       {
         val: 3,
         desc: 3,
-        selected: 'selected'
+        selected: 'selected' //this is the default value
       },
       {
         val: 4,

@@ -34,8 +34,8 @@ function calculateOutOfPocket(persona, prov = "ON") {
 */
 function calculateChildCareCost(persona, prov = "ON") {
     const childCount    = persona.children || 0;
-    const eventsAtStage = findEventsAtStage(prov, persona.stage);
-    const careCost      = getProvData(prov, 'child-care-per-child-per-day');
+    const eventsAtStage = util.findEventsAtStage(prov, persona.stage);
+    const careCost      = util.getProvData(prov, 'child-care-per-child-per-day');
 
     return childCount * eventsAtStage * careCost;
 }
@@ -58,11 +58,9 @@ function calculateFees(persona, prov = "ON") {
       + (Persona Low / High Conflict * legal fees H / L of selected province)
     */
     //TODO COURT FEES FOR "DIVORCE WITH CHILDREN" not defined
-    const courtFeesAtStage = findCourtFeesAtStage(prov, persona.stage);
-    const profFeesAtStage = findProfessionalFeesAtStage(prov, persona.stage);
-    const legalFees = calculateLegalFees(persona, prov);
-
-    console.log(courtFeesAtStage, profFeesAtStage, legalFees);
+    const courtFeesAtStage = util.findCourtFeesAtStage(prov, persona.stage);
+    const profFeesAtStage  = util.findProfessionalFeesAtStage(prov, persona.stage);
+    const legalFees        = calculateLegalFees(persona, prov);
 
     return courtFeesAtStage + profFeesAtStage + legalFees;
 }
@@ -76,10 +74,19 @@ function calculateFees(persona, prov = "ON") {
 * @param {String} - prov - acronym of province
 * @return {Number} Legal fees
 */
+
+/*
+  Legal Aid Calculation
+  1) Legal aid eligibility (is personal ruled out?)
+  2) Do they qualify for legal aid based on number of children and prvovincial salary cutoff
+  3) If eligible, OR does not have lawyer, legal fee is 0
+  4) Otherwise get legal fee based on stage, adjusted by conflict multipler
+
+*/
 function calculateLegalFees(persona, prov = "ON") {
     const conflictString = persona.conflict == 'h' && 'high-conflict' || 'low-conflict';
     const searchString   = `litigation-fees-${conflictString}`;
-    return getProvData(prov, searchString);
+    return util.getProvData(prov, searchString);
 }
 
 
@@ -87,8 +94,8 @@ function calculateLegalFees(persona, prov = "ON") {
 
 //Transportation (Court events by stage * Distance from courthouse)
 function calculateTransportCost(persona, prov) {
-  const eventsAtStage = findEventsAtStage(prov, persona.stage);
-  const transportCost = getProvData(prov, `transport-${selectedDistance}`);
+  const eventsAtStage = util.findEventsAtStage(prov, persona.stage);
+  const transportCost = util.getProvData(prov, `transport-${userInputs.distance}`);
   return eventsAtStage * transportCost;
 }
 
@@ -103,8 +110,8 @@ function calculateTransportCost(persona, prov) {
 function calculateLostIncome( persona, prov ) {
   if ( !persona.employed ) return 0;
 
-  const eventsAtStage = findEventsAtStage(prov, persona.stage);
-  const income        = getProvData(prov, `daily-income-band-` + selectedIncomeBand) * persona.employed;
+  const eventsAtStage = util.findEventsAtStage(prov, persona.stage);
+  const income        = util.getProvData(prov, `daily-income-band-` + userInputs.incomeBand) * persona.employed;
   const paidWageLost  = eventsAtStage * persona['days-off-per-appearance'] * income;
   const sickDaysLost  = eventsAtStage * persona['sick-days-per-appearance'] * income;
 
@@ -114,5 +121,5 @@ function calculateLostIncome( persona, prov ) {
 
 //Caculatae moving cost
 function calculateMovingCost(persona, prov) {
-  return !!persona.move && getProvData(prov, "moving-costs") || 0;
+  return !!persona.move && util.getProvData(prov, "moving-costs") || 0;
 }

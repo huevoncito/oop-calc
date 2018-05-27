@@ -2,7 +2,7 @@ const csv = require('csv-parser');
 const _   = require('underscore');
 const fs  = require('fs');
 
-//Take an object where all properties are strings and return a properly typed version
+//Take an object where all properties are strings and return a properly typed object
 function setDataTypes(obj) {
   for ( var key in obj ) {
     let val = obj[key];
@@ -23,6 +23,7 @@ function setDataTypes(obj) {
 //Read data from a CSV, set types, and return clean array
 function parseData(path) {
   let cleanData = [];
+
   return new Promise( (resolve, reject) => {
     fs.createReadStream( path )
       .pipe( csv({}) )
@@ -41,7 +42,7 @@ function parseData(path) {
 //get the data and return it
 module.exports = async function getData () {
     const personaData = await parseData(`${__dirname}/../data/persona-data.csv`);
-    const provData = await parseData(`${__dirname}/../data/province-data.csv`);
+    const provData    = await parseData(`${__dirname}/../data/province-data.csv`);
 
     return {
       personaData,
