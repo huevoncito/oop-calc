@@ -1,6 +1,7 @@
-const csv = require('csv-parser');
-const _   = require('underscore');
-const fs  = require('fs');
+const csv  = require('csv-parser');
+const _    = require('underscore');
+const fs   = require('fs');
+const path = require('path');
 
 //Take an object where all properties are strings and return a properly typed object
 function setDataTypes(obj) {
@@ -21,11 +22,10 @@ function setDataTypes(obj) {
 }
 
 //Read data from a CSV, set types, and return clean array
-function parseData(path) {
+function parseData(filePath) {
   let cleanData = [];
-
   return new Promise( (resolve, reject) => {
-    fs.createReadStream( path )
+    fs.createReadStream( filePath )
       .pipe( csv({}) )
       .on('data', data => {
           let cleanObject = setDataTypes(data);
@@ -39,13 +39,30 @@ function parseData(path) {
   });
 }
 
+function addPersonaStories( personaData ) {
+  // const storyDir = path.relative(process.cwd(), '../data/stories.json');
+  const storyDir  = path.resolve(__dirname, '../data/stories.json');
+  const storyData = JSON.parse( fs.readFileSync(storyDir) );
+
+  return personaData.map( p => {
+    const matchingPersona = _.findWhere( storyData.personaStories, {persona: p.persona} );
+    if ( !matchingPersona ) {
+      throw new Error(500, `No story data found for ${p.persona}. This is most likely a spelling error in stories.json`);
+    }
+    p.story = matchingPersona.story;
+    return p;
+  });
+
+
+}
+
 //get the data and return it
 module.exports = async function getData () {
-    const personaData = await parseData(`${__dirname}/../data/persona-data.csv`);
-    const provData    = await parseData(`${__dirname}/../data/province-data.csv`);
+    let personaData = await parseData(`${__dirname}/../data/persona-data.csv`);
+    const provData  = await parseData(`${__dirname}/../data/province-data.csv`);
 
     return {
-      personaData,
+      personaData: addPersonaStories( personaData ),
       provData
     };
 }

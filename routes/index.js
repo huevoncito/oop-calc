@@ -14,34 +14,33 @@ router.get('/', async function(req, res, next) {
     return persona;
   });
 
-
   res.render('index', {
     personas: personas,
     incomeBands: [
       {
         val: 1,
-        desc: 1
+        desc: "Up to $25,000"
       },
       {
         val: 2,
-        desc: 2
+        desc: "$25,001 - $50,000"
       },
       {
         val: 3,
-        desc: 3,
+        desc: "$50,001 - $75,000",
         selected: 'selected' //this is the default value
       },
       {
         val: 4,
-        desc: 4
+        desc: "$75,001 - $100,000"
       },
       {
         val: 5,
-        desc: 5
+        desc: "$100,001 - $150,000"
       },
       {
         val: 6,
-        desc: 6
+        desc: "$150,001 and up"
       }
     ],
     distances: [

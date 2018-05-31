@@ -1,40 +1,40 @@
-<div class="container">
-  <div class="row">
-      <div class="twelve columns">
-        <h1>Out of Pocket Calculator - Family Court</h1>
-      </div>
-  </div>
 
-  <div class="row" id='controls'>
-    <div class="four columns">
-      <label for="select-province">Province</label>
-      <select class="u-full-width" id="select-province" name='select-province'>
-        {{#each provinces}}
-          <option value="{{acronym}}">{{name}}</option>
-        {{/each}}
-      </select>
+<div class="row">
+    <div class="col-xs-12">
+      <h1>Out of Pocket Costs of Family Disputes in Canada</h1>
     </div>
-    <div class="four columns">
-      <label for="select-distance">Distance</label>
-      <select class="u-full-width" id="select-distance" name='select-distance'>
-        {{#each distances}}
-          <option value="{{val}}">{{desc}}</option>
-        {{/each}}
-      </select>
-    </div>
-    <div class="four columns">
-      <label for="select-income">Income</label>
-      <select class="u-full-width" id="select-income" name='select-income'>
-        {{#each incomeBands}}
-          <option value="{{val}}" {{selected}}>{{desc}}</option>
-        {{/each}}
-      </select>
-    </div>
-  </div>
+</div>
 
+<div class="row" id='controls'>
+  <div class="col-xs-6 col-sm-4">
+    <label for="select-province">Province</label>
+    <select class="u-full-width" id="select-province" name='select-province'>
+      {{#each provinces}}
+        <option value="{{acronym}}">{{name}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="col-xs-6 col-sm-4">
+    <label for="select-distance">Distance</label>
+    <select class="u-full-width" id="select-distance" name='select-distance'>
+      {{#each distances}}
+        <option value="{{val}}">{{desc}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="col-xs-6 col-sm-4">
+    <label for="select-income">Income</label>
+    <select class="u-full-width" id="select-income" name='select-income'>
+      {{#each incomeBands}}
+        <option value="{{val}}" {{selected}}>{{desc}}</option>
+      {{/each}}
+    </select>
+  </div>
+</div>
+
+
+<div class="row">
   {{#each personas}}
-    <div class="row">
-      {{> personaCard}}
-    </div>
+    {{> personaCard}}
   {{/each}}
 </div>
