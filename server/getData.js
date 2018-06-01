@@ -47,6 +47,7 @@ function addPersonaStories( personaData ) {
   return personaData.map( p => {
     const matchingPersona = _.findWhere( storyData.personaStories, {persona: p.persona} );
     if ( !matchingPersona ) {
+      console.log(`No story data found for ${p.persona}. This is most likely a spelling error in stories.json`);
       throw new Error(500, `No story data found for ${p.persona}. This is most likely a spelling error in stories.json`);
     }
     p.story = matchingPersona.story;

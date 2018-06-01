@@ -10,26 +10,40 @@ function calculateImpact(persona, prov = "ON") {
   return {
     courtEvents : util.findEventsAtStage(prov, persona.stage),
     prepDays    : numeral( calculatePrepDays(persona, prov) ).format('0.[00]'),
-    instability : 0
+    instability : calculateInstability(persona)
+  }
+}
+
+
+
+function calculateInstability(persona) {
+  //People above 75k don't pay health and have more flexibility
+  const health = userInputs.income < 75000 && persona['health-costs'] || 1;
+  const flex   = userInputs.income < 75000 && persona['job-flexibility'] || 1;
+
+  //People above 100k don't have income source problems (eg. can pay credit)
+  const source = userInputs.income < 100000 && persona['payment-source'] || 1;
+  const move   = persona.move && 5 || 1;
+
+  const score = health + move + source + flex + persona['health-impact'] + persona['job-instability'];
+
+  if ( score < 10 ) {
+    return "Low";
+  } else if ( score < 20 ) {
+    return "Medium";
+  } else {
+    return "High";
   }
 
 }
 
 
+///TODO: WITH AND WITHOUT LAWYER
 function calculatePrepDays(persona, prov = "ON") {
     const courtEvents    = util.findEventsAtStage(prov, persona.stage);
-    let daysPerAppearnce = persona['days-off-per-appearance'];
+    const daysPerAppearance = persona['days-off-per-appearance'];
+    const daysperAppearanceWithLawyer = util.adjustForLawyer(daysPerAppearance);
 
-    if ( !!persona.lawyer ) {
-      console.log( userInputs.incomeBand);
-      if ( userInputs.incomeBand === 6 ) {
-        console.log('in 6 adjust');
-        daysPerAppearnce = daysPerAppearnce / 3;
-      } else if ( userInputs.incomeBand === 5 ) {
-        console.log('in 5 adjust');
-        daysPerAppearnce = 2 * (daysPerAppearnce / 3);
-      }
-    }
-
+    //return with lawyer, and without lawyer
     return courtEvents * daysPerAppearnce;
 }

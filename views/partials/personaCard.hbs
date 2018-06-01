@@ -1,81 +1,92 @@
-<div class="col-xs-12 col-sm-6 persona-card" id='{{persona}}-card' style="background-color: {{bgColour}}">
-  <div class="row">
-    <div class="col-xs-12 col-sm-5 col-md-4">
-        <img src="" alt="{{persona}}">
+<div class="col-xs-12 col-sm-6">
+
+  <div class="persona-card" id='{{persona}}-card' style="background-color: {{bgColour}}">
+    <div class="row">
+      <div class="col-xs-12 col-sm-5 col-md-4">
+          <img src="" alt="{{persona}}">
+      </div>
+      <div class="col-xs-12 col-sm-7 col-md-8 persona-story collapsed">
+          <h2 class='persona-name'>{{persona}}</h2>
+          {{{story}}}
+      </div>
+      <div class="story-mask">
+        <a href="#" class='toggle-view'>View more...</a>
+      </div>
     </div>
-    <div class="col-xs-12 col-sm-7 col-md-8">
-        <h2 class='persona-name'>{{persona}}</h2>
-        {{{story}}}
-        <div class="story-mask">
+    <div class="row" style='border-top: 1px solid white; padding-top: 10px;'>
 
-        </div>
+      <div class="col-xs-12 col-sm-6 category">
+          <h3 class='category-title'>Out of Pocket Costs</h3>
+          <div class="row">
+            <div class="col-xs-6">
+              <span class='sub-category-title'>Legal Fees With Lawyer</span>
+            </div>
+            <div class="col-xs-6">
+              <span class='sub-category-value oop-feesLawyer'></span>
+            </div>
+            <div class="col-xs-6">
+              <span class='sub-category-title'>Legal Fees Without a Lawyer</span>
+            </div>
+            <div class="col-xs-6">
+              <span class='sub-category-value oop-feesNoLawyer'></span>
+            </div>
+            <div class="col-xs-6">
+              <span class='sub-category-title'>Resolved In Mediation</span>
+            </div>
+            <div class="col-xs-6">
+              <span class='sub-category-value oop-mediation'></span>
+            </div>
+            <div class="col-xs-6">
+              <span class='sub-category-title'>Lost Income</span>
+            </div>
+            <div class="col-xs-6">
+              <span class='sub-category-value oop-lostIncome'></span>
+            </div>
+            <div class="col-xs-6">
+              <span class='sub-category-title'>Transport</span>
+            </div>
+            <div class="col-xs-6">
+              <span class='sub-category-value oop-transport'></span>
+            </div>
+            <div class="col-xs-6">
+              <span class='sub-category-title'>Moving</span>
+            </div>
+            <div class="col-xs-6">
+              <span class='sub-category-value oop-moving'></span>
+            </div>
+            <!-- <div class="col-xs-6 top-border-white">
+              <span class='sub-category-title'>Total</span>
+            </div>
+            <div class="col-xs-6">
+              <span class='sub-category-value'><span class='oop-total'></span></span>
+            </div> -->
+          </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 category">
+          <h3 class='category-title'>Impact</h3>
+          <div class="row">
+            <div class="col-xs-6">
+              <span class='sub-category-title'>Court Events</span>
+            </div>
+            <div class="col-xs-6">
+              <span class='sub-category-value impact-courtEvents'></span>
+            </div>
+            <div class="col-xs-6">
+              <span class='sub-category-title'>Prep Days</span>
+            </div>
+            <div class="col-xs-6">
+              <span class='sub-category-value impact-prepDays'></span>
+            </div>
+
+            <div class="col-xs-6">
+              <span class='sub-category-title'>Instability</span>
+            </div>
+            <div class="col-xs-6">
+              <span class='sub-category-value impact-instability'></span>
+            </div>
+
+          </div>
+      </div>
+
     </div>
-  </div>
-
-  <hr>
-
-  <div class="row">
-
-    <div class="col-xs-12 col-sm-6 category">
-        <h3 class='category-title'>Out of pocket: <span class='oop-total'></span></h3>
-        <div class="row">
-          <div class="col-xs-6">
-            <span class='sub-category-title'>Child Care</span>
-          </div>
-          <div class="col-xs-6">
-            <span class='sub-category-value oop-childCare'></span>
-          </div>
-          <div class="col-xs-6">
-            <span class='sub-category-title'>Fees</span>
-          </div>
-          <div class="col-xs-6">
-            <span class='sub-category-value oop-fees'></span>
-          </div>
-          <div class="col-xs-6">
-            <span class='sub-category-title'>Lost Income</span>
-          </div>
-          <div class="col-xs-6">
-            <span class='sub-category-value oop-lostIncome'></span>
-          </div>
-          <div class="col-xs-6">
-            <span class='sub-category-title'>Transport</span>
-          </div>
-          <div class="col-xs-6">
-            <span class='sub-category-value oop-transport'></span>
-          </div>
-          <div class="col-xs-6">
-            <span class='sub-category-title'>Moving</span>
-          </div>
-          <div class="col-xs-6">
-            <span class='sub-category-value oop-moving'></span>
-          </div>
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-6 category">
-        <h3 class='category-title'>Impact</h3>
-        <div class="row">
-          <div class="col-xs-6">
-            <span class='sub-category-title'>Court Events</span>
-          </div>
-          <div class="col-xs-6">
-            <span class='sub-category-value impact-courtEvents'></span>
-          </div>
-          <div class="col-xs-6">
-            <span class='sub-category-title'>Prep Days</span>
-          </div>
-          <div class="col-xs-6">
-            <span class='sub-category-value impact-prepDays'></span>
-          </div>
-
-          <div class="col-xs-6">
-            <span class='sub-category-title'>Instability</span>
-          </div>
-          <div class="col-xs-6">
-            <span class='sub-category-value impact-instability'></span>
-          </div>
-
-        </div>
-    </div>
-
-  </div>
-</div>
+    </div></div>

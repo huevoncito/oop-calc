@@ -45,6 +45,8 @@ const util = {
     return util.getProvData(prov, searchString);
   },
 
+
+
   /**
   * Find professional fees for a given stage
   *
@@ -56,6 +58,28 @@ const util = {
   findProfessionalFeesAtStage(prov = "ON", stage) {
     const searchString = `professional-fees-by-stage-${stage.toLowerCase()}`;
     return util.getProvData(prov, searchString);
+  },
+
+  findLegalFeesAtStage(prov = "ON", stage) {
+    const searchString = `legal-fees-by-stage-${stage.toLowerCase()}`;
+    return util.getProvData(prov, searchString);
+  },
+
+  adjustForLawyer(figure) {
+    if ( userInputs.income > 100000 ) {
+      return figure / 3;
+    } else if ( userInputs.income > 75000 ) {
+      return 2 * (figure / 3);
+    }
+  },
+
+  removeClass(el, className) {
+    if (el.classList) {
+      el.classList.remove(className);
+    } else {
+      el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+    }
+
   },
 
   renderCategory({persona, category, data}) {

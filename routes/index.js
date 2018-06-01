@@ -16,6 +16,7 @@ router.get('/', async function(req, res, next) {
 
   res.render('index', {
     personas: personas,
+    //This list matches the one found in script.js on the client. If you change this, change that one too.
     incomeBands: [
       {
         val: 1,
