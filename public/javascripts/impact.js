@@ -5,12 +5,13 @@ function calculateImpact(persona, prov = "ON") {
 // Note: for this, the higher the income band the less source of payment or job flexibility affects the Instability Risk Factor. We want a 5 level risk factor rating
 
   //Average number of days spent in preparation: Court events by stage * Days per appearance but if Lawyer = Yes AND Income in top band reduce by 2/3, in 5th top band, reduce by 1/3
-
+  const prepDays = calculatePrepDays(persona, prov);
 
   return {
-    courtEvents : util.findEventsAtStage(prov, persona.stage),
-    prepDays    : numeral( calculatePrepDays(persona, prov) ).format('0.[00]'),
-    instability : calculateInstability(persona)
+    courtEvents    : util.findEventsAtStage(prov, persona.stage),
+    prepDaysLawyer : numeral( prepDays.lawyer  ).format('0.[00]'),
+    prepDaysNoLawyer : numeral( prepDays.noLawyer  ).format('0.[00]'),
+    instability    : calculateInstability(persona)
   }
 }
 
@@ -45,5 +46,8 @@ function calculatePrepDays(persona, prov = "ON") {
     const daysperAppearanceWithLawyer = util.adjustForLawyer(daysPerAppearance);
 
     //return with lawyer, and without lawyer
-    return courtEvents * daysPerAppearnce;
+    return {
+      lawyer  : courtEvents * daysPerAppearance,
+      noLawer : courtEvents * daysperAppearanceWithLawyer
+    }
 }

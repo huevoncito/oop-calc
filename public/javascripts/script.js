@@ -52,7 +52,7 @@ function runCalculations() {
   datastore.personaData.forEach( persona => {
     //run the numbers
     const oop    = calculateOutOfPocket(persona, userInputs.prov);
-    // const impact = calculateImpact(persona, userInputs.prov);
+    const impact = calculateImpact(persona, userInputs.prov);
 
     //render 'em
     util.renderCategory( {persona, category: "oop", data: oop} );
