@@ -23,8 +23,12 @@
     </select>
   </div>
   <div class="col-xs-6 col-sm-4">
-    <label for="select-income">Income</label>
-    $<input type='number' class="u-full-width" id="select-income" name='select-income' value='50000'/>
+    <!-- <label for="select-income">Income</label>
+    $<input type='number' class="u-full-width" id="select-income" name='select-income' value='50000'/> -->
+    <div  data-selecting='availability'>
+      <span class="slider-label">Income: <span class='income-val' id="income-slider-val">$50,000</span></span>
+      <div id="income-slider"></div>
+    </div>
   </div>
 </div>
 

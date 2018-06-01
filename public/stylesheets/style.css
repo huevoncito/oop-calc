@@ -8,11 +8,20 @@ body {
   padding-top: 10px;
   background: white;
   z-index: 2; }
+  #controls #income-slider {
+    margin-top: 15px;
+    margin-bottom: 20px; }
 
 .persona-card {
   background: lightblue;
   padding: 30px;
   margin-bottom: 20px; }
+  .persona-card .sub-category-value {
+    text-align: right;
+    float: right; }
+  .persona-card img.avatar {
+    max-width: 100%;
+    height: auto; }
   .persona-card .persona-story.collapsed {
     max-height: 200px;
     overflow: hidden; }
@@ -35,6 +44,8 @@ body {
     .persona-card .story-mask .toggle-view {
       position: absolute;
       bottom: 10px;
+      text-align: center;
+      width: 100%;
       left: 10px; }
     .persona-card .story-mask.hidden {
       display: none; }

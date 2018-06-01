@@ -71,6 +71,7 @@ const util = {
     } else if ( userInputs.income > 75000 ) {
       return 2 * (figure / 3);
     }
+    return figure;
   },
 
   removeClass(el, className) {

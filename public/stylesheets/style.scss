@@ -10,6 +10,11 @@ body {
   padding-top: 10px;
   background: white;
   z-index: 2;
+
+  #income-slider {
+    margin-top: 15px;
+    margin-bottom: 20px; //for mobile
+  }
 }
 
 
@@ -19,6 +24,17 @@ $collapse-height: 200px;
   background: lightblue;
   padding: 30px;
   margin-bottom: 20px;
+
+  .sub-category-value {
+    text-align: right;
+    float: right;
+  }
+
+
+  img.avatar {
+    max-width: 100%;
+    height: auto;
+  }
 
   .persona-story {
     &.collapsed {
@@ -44,6 +60,8 @@ $collapse-height: 200px;
     .toggle-view {
       position: absolute;
       bottom: 10px;
+      text-align: center;
+      width: 100%;
       left: 10px;
     }
 

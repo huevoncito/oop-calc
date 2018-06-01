@@ -7,24 +7,35 @@
 * @return {Number} Out of pocket expenses
 */
 function calculateOutOfPocket(persona, prov = "ON") {
-  // const childCare  = calculateChildCareCost(persona, prov);
-  const legalFees = calculateLegalFees(persona, prov);
-  const mediation = calcuateMediationFees(persona, prov);
+  const childCare  = calculateChildCareCost(persona, prov);
+  const legalFees  = calculateLegalFees(persona, prov);
+  const mediation  = calcuateMediationFees(persona, prov);
   const transport  = calculateTransportCost(persona, prov);
   const lostIncome = calculateLostIncome(persona, prov);
   const moving     = calculateMovingCost(persona, prov);
 
   return {
-    // childCare  : numeral(childCare).format(currencyFormat),
-    feesLawyer   : numeral(legalFees.lawyer).format(currencyFormat),
-    feesNoLawyer : numeral(legalFees.noLawyer).format(currencyFormat),
-    mediation    : numeral(mediation).format(currencyFormat),
-    transport    : numeral(transport).format(currencyFormat),
-    lostIncome   : numeral(lostIncome).format(currencyFormat),
-    moving       : numeral(moving).format(currencyFormat)
+    childCareLawyer   : numeral(childCare.lawyer).format(currencyFormat),
+    childCareNoLawyer : numeral(childCare.noLawyer).format(currencyFormat),
+    feesLawyer        : numeral(legalFees.lawyer).format(currencyFormat),
+    feesNoLawyer      : numeral(legalFees.noLawyer).format(currencyFormat),
+    mediation         : numeral(mediation).format(currencyFormat),
+    transport         : numeral(transport).format(currencyFormat),
+    lostIncome        : numeral(lostIncome).format(currencyFormat),
+    moving            : numeral(moving).format(currencyFormat)
   };
 }
 
+function calculateChildCareDays(persona, prov) {
+  const eventsAtStage = util.findEventsAtStage(prov, persona.stage);
+  const prepDaysAtStage = calculatePrepDays(persona, prov);
+
+  return {
+    lawyer   : eventsAtStage + prepDaysAtStage.lawyer,
+    noLawyer : eventsAtStage + prepDaysAtStage.noLawyer
+
+  }
+}
 
 /**
 * Calculate the cost of childcare for a persona in a province
@@ -35,11 +46,14 @@ function calculateOutOfPocket(persona, prov = "ON") {
 * @return {Number} Returns number of events at a given stage
 */
 function calculateChildCareCost(persona, prov = "ON") {
-    const childCount    = persona.children || 0;
-    const eventsAtStage = util.findEventsAtStage(prov, persona.stage);
-    const careCost      = util.getProvData(prov, 'child-care-per-child-per-day');
+    const childCount = persona.children || 0;
+    const days       = calculateChildCareDays(persona, prov);
+    const careCost   = util.getProvData(prov, 'child-care-per-child-per-day') * persona.children;
 
-    return util.adjustForLawyer(childCount * eventsAtStage * careCost);
+    return {
+      lawyer   : childCount * days.lawyer * careCost,
+      noLawyer : childCount * days.noLawyer * careCost,
+    };
 }
 
 

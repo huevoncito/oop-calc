@@ -56,7 +56,31 @@ function runCalculations() {
 
     //render 'em
     util.renderCategory( {persona, category: "oop", data: oop} );
-    // util.renderCategory( {persona, category: "impact", data: impact });
+    util.renderCategory( {persona, category: "impact", data: impact });
+  });
+}
+
+function initIncomeSlider() {
+  //Init income slider and listen for changes
+  const incomeSilderElem = document.querySelector("#income-slider");
+
+  const incomeSlider = noUiSlider.create(incomeSilderElem, {
+    start    : 50,
+    connect  : [true, false],
+    step     : 5,
+    range    : {
+      min : 0,
+      max : 250
+    }
+  });
+
+  incomeSlider.on('update', (val) => {
+
+    const valToShow = parseInt(val[0]) * 1000;
+    userInputs.income= parseInt(valToShow);
+    runCalculations();
+    document.querySelector('#income-slider-val').innerHTML = numeral(valToShow).format(currencyFormat);
+
   });
 }
 
@@ -64,6 +88,8 @@ function runCalculations() {
 document.addEventListener("DOMContentLoaded", function(event) {
   getData()
     .then( function (data) {
+      //need to run this after data load because init triggers update for some reason
+      initIncomeSlider();
       runCalculations();
     });
 
@@ -80,10 +106,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
   });
 
   // Listen for Income Change
-  document.querySelector("#select-income").addEventListener('change', function (event) {
-    userInputs.income= parseInt(event.target.value);
-    runCalculations();
-  });
+  // document.querySelector("#select-income").addEventListener('change', function (event) {
+
+  // });
 
 
   //Toggle full persona stories
