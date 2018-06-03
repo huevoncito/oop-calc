@@ -19,7 +19,7 @@ function calculateOutOfPocket(persona, prov = "ON") {
     childCareNoLawyer : numeral(childCare.noLawyer).format(currencyFormat),
     feesLawyer        : numeral(legalFees.lawyer).format(currencyFormat),
     feesNoLawyer      : numeral(legalFees.noLawyer).format(currencyFormat),
-    mediation         : numeral(mediation).format(currencyFormat),
+    // mediation         : numeral(mediation).format(currencyFormat),
     transport         : numeral(transport).format(currencyFormat),
     lostIncome        : numeral(lostIncome).format(currencyFormat),
     moving            : numeral(moving).format(currencyFormat)
@@ -27,6 +27,8 @@ function calculateOutOfPocket(persona, prov = "ON") {
 }
 
 function calculateChildCareDays(persona, prov) {
+  if ( !persona.children ) return 0;
+
   const eventsAtStage = util.findEventsAtStage(prov, persona.stage);
   const prepDaysAtStage = calculatePrepDays(persona, prov);
 

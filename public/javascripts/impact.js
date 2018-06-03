@@ -9,12 +9,12 @@ function calculateImpact(persona, prov = "ON") {
   const childCareDays = calculateChildCareDays(persona, prov);
 
   return {
-    childCareDaysLawyer   : numeral(childCareDays.lawyer).format('0.[00]'),
-    childCareDaysNoLawyer : numeral(childCareDays.noLawyer).format('0.[00]'),
-    courtEvents           : util.findEventsAtStage(prov, persona.stage),
-    prepDaysLawyer        : numeral( prepDays.lawyer  ).format('0.[00]'),
-    prepDaysNoLawyer      : numeral( prepDays.noLawyer  ).format('0.[00]'),
-    instability           : calculateInstability(persona)
+    childCareDaysLawyer   : numeral( childCareDays.lawyer ).format('0.[00]'),
+    childCareDaysNoLawyer : numeral( childCareDays.noLawyer ).format('0.[00]'),
+    courtEvents           : util.findEventsAtStage( prov, persona.stage ),
+    prepDaysLawyer        : numeral( prepDays.lawyer ).format('0.[00]'),
+    prepDaysNoLawyer      : numeral( prepDays.noLawyer ).format('0.[00]'),
+    instability           : calculateInstability( persona )
   }
 }
 
@@ -38,11 +38,9 @@ function calculateInstability(persona) {
   } else {
     return "High";
   }
-
 }
 
 
-///TODO: WITH AND WITHOUT LAWYER
 function calculatePrepDays(persona, prov = "ON") {
     const courtEvents    = util.findEventsAtStage(prov, persona.stage);
     const daysPerAppearance = persona['days-off-per-appearance'];
@@ -50,7 +48,7 @@ function calculatePrepDays(persona, prov = "ON") {
 
     //return with lawyer, and without lawyer
     return {
-      lawyer  : courtEvents * daysPerAppearance,
-      noLawyer : courtEvents * daysPerAppearanceWithLawyer
+      noLawyer : courtEvents * daysPerAppearance,
+      lawyer   : courtEvents * daysPerAppearanceWithLawyer
     }
 }

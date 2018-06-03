@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const getData = require(`../server/getData.js`);
 
-const colourList = [ "#e1131d", "#ff717b", "#ecb05b", "#acbf00", "#00a6a0", "#e68d61", "#f4e1c6", "#5cc2b7", "#f4a9c9", "#d1466c"];
+const colourList = [ "#f0898e", "#ff717b", "#ecb05b", "#acbf00", "#00a6a0", "#e68d61", "#f4e1c6", "#5cc2b7", "#f4a9c9", "#d1466c"];
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
