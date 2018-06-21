@@ -1,0 +1,38 @@
+<!doctype>
+<html>
+  <head>
+    <title>Test</title>
+    <meta charset="utf-8">
+
+    <!-- Libs to stub -->
+    <script src="../public/javascripts/lib/underscore-min.js"></script>
+    <script src="../public/javascripts/lib/numeral.min.js"></script>
+    <script src="../public/javascripts/lib/nouislider.min.js"></script>
+
+    <!-- SCRIPTS Under test-->
+    <script src="../public/javascripts/getData.js" charset="utf-8"></script>
+    <script src="../public/javascripts/util.js" charset="utf-8"></script>
+    <!-- <script src="../public/javascripts/script.js" charset="utf-8"></script> -->
+    <script src="../public/javascripts/outOfPocket.js" charset="utf-8"></script>
+    <script src="../public/javascripts/impact.js" charset="utf-8"></script>
+
+    <!-- Test Libs -->
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <!-- <script src="../node_modules/sinon-chai/lib/sinon-chai.js"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/6.0.0/sinon.min.js"></script>
+
+    <!-- Tests -->
+    <script src='setup.js'></script>
+    <script src='util.js'></script>
+    <script src='outOfPocket.js'></script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script>
+      mocha.run();
+    </script>
+  </body>
+</html>

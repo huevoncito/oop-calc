@@ -42,8 +42,8 @@ function calculateInstability(persona) {
 
 
 function calculatePrepDays(persona, prov = "ON") {
-    const courtEvents    = util.findEventsAtStage(prov, persona.stage);
-    const daysPerAppearance = persona['days-off-per-appearance'];
+    const courtEvents                 = util.findEventsAtStage(prov, persona.stage);
+    const daysPerAppearance           = persona['days-off-per-appearance'];
     const daysPerAppearanceWithLawyer = util.adjustForLawyer(daysPerAppearance);
 
     //return with lawyer, and without lawyer

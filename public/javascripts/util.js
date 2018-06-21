@@ -8,6 +8,11 @@ const util = {
   * @return {String | Number | Boolean | Object} Returns a value if prop passed, otherwise returns the full object
   */
   getProvData(prov = "ON", prop) {
+
+    if ( !prop ) {
+      throw new Error("Must pass a property to retrieve");
+    }
+
     const provData = _.findWhere( datastore.provData, {province: prov} );
     if ( !!prop && _.isUndefined(provData[prop]) ) {
       throw new Error(`${prop} not defined for ${prov}`);
