@@ -16,7 +16,6 @@ describe('Out of pocket', function () {
     }
   });
 
-
   describe('calculateChildCareDays', function () {
     it ('should return zero if persona has no kids', function () {
       personaUnderTest.children = 0;
@@ -29,6 +28,7 @@ describe('Out of pocket', function () {
       assert( stubs['findEventsAtStage'].calledWith("BC", "application") );
       assert( stubs['prepDays'].calledWith(personaUnderTest, "BC") );
       assert.isObject( childCareDays );
+      assert.hasAllKeys( childCareDays, ['lawyer', 'noLawyer'] );
       assert.equal(childCareDays.lawyer, 5 + 2 );
       assert.equal(childCareDays.noLawyer, 5 + 5 );
     });
@@ -50,6 +50,7 @@ describe('Out of pocket', function () {
       assert( childCareDaysStub.calledWith(personaUnderTest, "BC") );
       assert( stubs['getProvData'].calledWith("BC", "child-care-per-child-per-day") );
       assert.isObject( result );
+      assert.hasAllKeys( result, ['lawyer', 'noLawyer'] );
       //childCount = 2, days with lawyer = 5, days without lawyer = 10, careCost = 200;
       assert.equal( result.lawyer, 2 * 5 * 200 );
       assert.equal( result.noLawyer, 2 * 10 * 200);
@@ -135,6 +136,7 @@ describe('Out of pocket', function () {
       const result = calculateLegalFees(personaUnderTest, "BC");
 
       assert.isObject(result);
+      assert.hasAllKeys( result, ['lawyer', 'noLawyer', 'mediation'] );
 
       //these should be the same
       assert.equal( result.noLawyer, 500 + 1000 );
@@ -148,12 +150,11 @@ describe('Out of pocket', function () {
       const result = calculateLegalFees(personaUnderTest, "BC");
 
       assert.isObject(result);
+      assert.hasAllKeys( result, ['lawyer', 'noLawyer', 'mediation'] );
 
       //these should be the same
       assert.equal( result.noLawyer, 500 + 1000 );
       assert.equal( result.lawyer, 2000 * 2 * 1 + (500 + 1000) )
     });
   });
-
-
 });

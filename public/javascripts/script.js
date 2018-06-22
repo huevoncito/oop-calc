@@ -43,7 +43,8 @@ const incomeBands = [
 let userInputs  = {
   distance   : "within-15km",
   income     :  50000,
-  prov       : "AB"
+  prov       : "AB",
+  conflict   : 1
 };
 
 
@@ -63,7 +64,6 @@ function runCalculations() {
 function initIncomeSlider() {
   //Init income slider and listen for changes
   const incomeSilderElem = document.querySelector("#income-slider");
-
   const incomeSlider = noUiSlider.create(incomeSilderElem, {
     start    : 50,
     connect  : [true, false],
@@ -75,7 +75,6 @@ function initIncomeSlider() {
   });
 
   incomeSlider.on('update', (val) => {
-
     const valToShow = parseInt(val[0]) * 1000;
     userInputs.income= parseInt(valToShow);
     runCalculations();

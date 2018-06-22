@@ -9,7 +9,7 @@
 function calculateOutOfPocket(persona, prov = "ON") {
   const childCare  = calculateChildCareCost(persona, prov);
   const legalFees  = calculateLegalFees(persona, prov);
-  const mediation  = calcuateMediationFees(persona, prov);
+  // const mediation  = calcuateMediationFees(persona, prov);
   const transport  = calculateTransportCost(persona, prov);
   const lostIncome = calculateLostIncome(persona, prov);
   const moving     = calculateMovingCost(persona, prov);
@@ -19,7 +19,7 @@ function calculateOutOfPocket(persona, prov = "ON") {
     childCareNoLawyer : numeral(childCare.noLawyer).format(currencyFormat),
     feesLawyer        : numeral(legalFees.lawyer).format(currencyFormat),
     feesNoLawyer      : numeral(legalFees.noLawyer).format(currencyFormat),
-    // mediation         : numeral(mediation).format(currencyFormat),
+    mediation         : numeral(legalFees.mediation).format(currencyFormat),
     transport         : numeral(transport).format(currencyFormat),
     lostIncome        : numeral(lostIncome).format(currencyFormat),
     moving            : numeral(moving).format(currencyFormat)
@@ -56,21 +56,6 @@ function calculateChildCareCost(persona, prov = "ON") {
       lawyer   : days.lawyer * careCost,
       noLawyer : days.noLawyer * careCost
     };
-}
-
-
-//Court-fees-by-stage-application
-//Any other part of calculation based on events, use 2
-
-//use court- stage - application for fees, number of  events (2), lawyer fees + mediation fees + 50% of professional fees-at application stage
-
-function calcuateMediationFees(persona, prov) {
-  const events        = 2; //this is fixed
-  const profFees      = util.findProfessionalFeesAtStage(prov, 'application') / 2;//fixed as well
-  const legalFees     = util.findLegalFeesAtStage(prov, 'application');
-  const mediationFees = util.getProvData(prov, 'mediation-fees'); //THIS FIELD IS NOT DEFINED;
-
-  return legalFees + mediationFees + profFees;
 }
 
 
@@ -124,15 +109,18 @@ function calculateLegalFees(persona, prov = "ON") {
     const profFeesAtStage    = util.findProfessionalFeesAtStage(prov, persona.stage);
     const combinedFees       = courtFeesAtStage + profFeesAtStage;
 
-    console.log('multiple', legalAidMultiple);
+    //mediation
+    const mediationLegalFees = util.findLegalFeesAtStage(prov, 'application');
+    const mediationProfFees  = util.findProfessionalFeesAtStage(prov, 'application');
+    const mediationCourtFees = util.findCourtFeesAtStage(prov, 'application');
+    const mediationFees      = util.getProvData(prov, 'mediation-fees');
 
     return {
-      lawyer   : legalFees * conflictMultiplier * legalAidMultiple + combinedFees,
-      noLawyer : combinedFees
+      lawyer    : legalFees * conflictMultiplier * legalAidMultiple + combinedFees,
+      noLawyer  : combinedFees,
+      mediation : mediationLegalFees * legalAidMultiple + mediationProfFees + mediationCourtFees + mediationFees
     };
 }
-
-
 
 
 //Transportation (Court events by stage * Distance from courthouse)
