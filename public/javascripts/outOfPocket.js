@@ -50,11 +50,11 @@ function calculateChildCareDays(persona, prov) {
 function calculateChildCareCost(persona, prov = "ON") {
     const childCount = persona.children || 0;
     const days       = calculateChildCareDays(persona, prov);
-    const careCost   = util.getProvData(prov, 'child-care-per-child-per-day') * persona.children;
+    const careCost   = util.getProvData(prov, 'child-care-per-child-per-day') * childCount;
 
     return {
-      lawyer   : childCount * days.lawyer * careCost,
-      noLawyer : childCount * days.noLawyer * careCost,
+      lawyer   : days.lawyer * careCost,
+      noLawyer : days.noLawyer * careCost
     };
 }
 
@@ -91,10 +91,7 @@ function getLegalAidEligibility(persona, prov) {
   const kidString    = persona.children < 2 && `${persona.children}-kids` || '2+-kids';
   const searchString = `legal-aid-eligibility-${kidString}`;
   const cutoff       = util.getProvData(prov, searchString);
-
   return userInputs.income < cutoff;
-
-
 }
 
 /**
@@ -120,13 +117,14 @@ function getLegalAidEligibility(persona, prov) {
     Professional fees + court fees by stage*/
 function calculateLegalFees(persona, prov = "ON") {
     //IF PERSON IS LEGALAID ELGIBLE, LEGAL FEES = 0
-    const legalAidElgible    = getLegalAidEligibility(persona, prov);
-    const legalAidMultiple   = !!legalAidElgible && 0 || 1;
+    const legalAidMultiple   = getLegalAidEligibility(persona, prov) ? 0 : 1;
     const legalFees          = util.findLegalFeesAtStage(prov, persona.stage);
     const conflictMultiplier = persona.conflict;
     const courtFeesAtStage   = util.findCourtFeesAtStage(prov, persona.stage);
     const profFeesAtStage    = util.findProfessionalFeesAtStage(prov, persona.stage);
     const combinedFees       = courtFeesAtStage + profFeesAtStage;
+
+    console.log('multiple', legalAidMultiple);
 
     return {
       lawyer   : legalFees * conflictMultiplier * legalAidMultiple + combinedFees,

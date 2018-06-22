@@ -1,4 +1,4 @@
-persona,children,days-off-per-appearance,sick-days-per-appearance,payment-source,job-flexibility,job-instability,employed,health-costs,stage,health-impact,conflict,move,Legal aid eligibaility y/n
+persona,children,days-off-per-appearance,sick-days-per-appearance,payment-source,job-flexibility,job-instability,employed,health-costs,stage,health-impact,conflict,move,legal-aid-eligible
 Aisha,1,3,1,5,4,4,1,2,application,1,1,y,y
 Marcus,3,6,1,4,4,2,1,1,separation-with-children,2,3,n,y
 Roberta,2,3,2,2,2,1,1,3,separation-with-children,1,3,y,y
