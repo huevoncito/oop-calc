@@ -66,11 +66,11 @@ function calculateChildCareCost(persona, prov = "ON") {
 
 function calcuateMediationFees(persona, prov) {
   const events        = 2; //this is fixed
-  const profFees      = util.findCourtFeesAtStage(prov, 'application') / 2;//fixed as well
+  const profFees      = util.findProfessionalFeesAtStage(prov, 'application') / 2;//fixed as well
   const legalFees     = util.findLegalFeesAtStage(prov, 'application');
   const mediationFees = util.getProvData(prov, 'mediation-fees'); //THIS FIELD IS NOT DEFINED;
 
-  return legalFees + mediationFees + profFees / 2
+  return legalFees + mediationFees + profFees;
 }
 
 
