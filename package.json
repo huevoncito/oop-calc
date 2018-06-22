@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "./bin/www",
-    "test": "mocha"
+    "test": "mocha-chrome ./test/test.html --log-level trace"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
@@ -20,6 +20,9 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "mocha-chrome": "^1.1.0",
     "nodemon": "^1.17.4"
   }
 }
