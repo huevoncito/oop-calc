@@ -37,5 +37,6 @@ This app can be deployed to any environment that supports Node.js 8.x or greater
 
 ## TODO
 1. More test coverage
-2. A cleaner interface
-3. Add build phase so that we can use `import { foo } from 'bar'` syntax. This should make client-side code easier to read and maintain. Would also help to have live reload capability included that reruns tests on change.
+2. Replace `node-sass-middleware` with `gulp-sass` or something like that, to remove insecure `hoek` dependency. 
+3. A cleaner interface
+4. Add build phase so that we can use `import { foo } from 'bar'` syntax. This should make client-side code easier to read and maintain. Would also help to have live reload capability included that reruns tests on change.
